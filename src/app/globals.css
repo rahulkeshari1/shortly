@@ -1,0 +1,268 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+:root {
+  --background: #08090b;
+  --foreground: #f4f4f5;
+
+  --panel: #0f1115;
+  --panel-hover: #12151a;
+
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.11);
+
+  --muted: #71717a;
+  --muted-light: #a1a1aa;
+
+  --input: #0b0d10;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--background);
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(
+      circle at 50% -20%,
+      rgba(255, 255, 255, 0.035),
+      transparent 35%
+    ),
+    var(--background);
+  color: var(--foreground);
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================================================
+   SELECTION
+   ========================================================= */
+
+::selection {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =========================================================
+   FORM ELEMENTS
+   ========================================================= */
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #52525b;
+}
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+input:focus,
+textarea:focus,
+select:focus,
+button:focus-visible,
+a:focus-visible {
+  outline: none;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.035);
+}
+
+/* =========================================================
+   UTILITY CLASSES
+   ========================================================= */
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  .border-subtle {
+    border-color: var(--border);
+  }
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+  }
+
+  .panel-hover {
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease;
+  }
+
+  .panel-hover:hover {
+    background: var(--panel-hover);
+    border-color: var(--border-strong);
+  }
+}
+
+
+/* =========================================================
+   DASHBOARD ANIMATIONS
+========================================================= */
+
+@keyframes dashboardFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dashboardScale {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes dashboardSuccess {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  60% {
+    transform: scale(1.12);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.dashboard-enter {
+  animation: dashboardFadeUp 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.dashboard-enter-delay {
+  animation: dashboardFadeUp 550ms cubic-bezier(0.22, 1, 0.36, 1) 100ms both;
+}
+
+.dashboard-enter-delay-2 {
+  animation: dashboardFadeUp 550ms cubic-bezier(0.22, 1, 0.36, 1) 180ms both;
+}
+
+.stat-card {
+  animation: dashboardScale 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.link-card {
+  animation: dashboardFadeUp 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.copy-success {
+  display: inline-flex;
+  animation: dashboardSuccess 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.link-card {
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.link-card:hover {
+  background: rgba(255, 255, 255, 0.012);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-enter,
+  .dashboard-enter-delay,
+  .dashboard-enter-delay-2,
+  .stat-card,
+  .link-card,
+  .copy-success {
+    animation: none !important;
+  }
+
+  .link-card {
+    transition: none !important;
+  }
+}
